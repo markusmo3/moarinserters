@@ -1,0 +1,9 @@
+{
+	"name":"MoarInserters",
+	"author":"NooBxGockeL",
+	"version":"1.0",
+	"title":"MoarInserters",
+	"homepage":"http://www.google.com",
+	"description":"All kinds of neat Insertery stuff",
+	"dependencies": ["base >= 0.10.5"]
+}
