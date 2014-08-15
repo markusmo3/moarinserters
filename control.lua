@@ -3,18 +3,30 @@ require("scripts/util")
 
 game.onevent(defines.events.onpreplayermineditem, function(event)
   if isMoarInserter(event.entity) then
+    -- splittedName = <type>-<range>-MIinserter-<direction>
     splittedName = moarinserters_stringsplit(event.entity.name, "-")
-    local direction = splittedName[4]
-    local oldPosition = event.entity.position
-    local oldDirection = event.entity.direction
     basename = splittedName[1] .. "-" .. splittedName[2] .. "-" .. splittedName[3]
     if game.player.cursorstack ~= nil and game.player.cursorstack.name == "moar-inserters-wrench" then
-      game.createentity {
-        name = basename .. "-" .. getNextDirection(direction, splittedName[1] == "alien"),
-        position = oldPosition,
-        direction = oldDirection,
+      newEntity = game.createentity {
+        name = basename .. "-" .. getNextDirection(splittedName[4], splittedName[1] == "alien"),
+        position = event.entity.position,
+        direction = event.entity.direction,
         force = game.forces.player
       }
+      if splittedName[1] == "smart" or splittedName[1] == "alien" then
+        for i=1,5 do
+          oldFilter = event.entity.getfilter(i)
+          if oldFilter ~= nil then 
+            newEntity.setfilter(oldFilter, i)
+          end
+        end
+        for i=0,2 do
+          oldCondition = event.entity.getcircuitcondition(i)
+          if oldCondition ~= nil then
+            newEntity.setcircuitcondition(i, oldCondition)
+          end
+        end
+      end
     else
       game.player.insert{name = basename, count = 1}
     end
