@@ -1,9 +1,9 @@
 {
 	"name":"MoarInserters",
 	"author":"NooBxGockeL",
-	"version":"1.0",
+	"version":"1.1",
 	"title":"MoarInserters",
-	"homepage":"http://www.google.com",
+	"homepage":"http://www.factorioforums.com/forum/viewtopic.php?f=14&t=5357&p=41210#p41210",
 	"description":"All kinds of neat Insertery stuff",
 	"dependencies": ["base >= 0.10.5"]
 }
