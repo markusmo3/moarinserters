@@ -36,6 +36,12 @@ data:extend(
     name = "moarinserters-tools",
     group = "moarinserters",
     order = "4"
+  },
+  {
+    type = "item-subgroup",
+    name = "moarinserters-mapeditorcleanup",
+    group = "moarinserters",
+    order = "5"
   }
 }
 )

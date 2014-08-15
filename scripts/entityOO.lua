@@ -11,7 +11,7 @@ MoarInserterEntityPrototypeTemplate = {
   type = "inserter",
   name = "TEMPLATE",
   icon = "TEMPLATE",
-  flags = {"player-creation"},
+  flags = {"placeable-neutral", "placeable-player", "player-creation"},
   minable = {hardness = 0.2, mining_time = 0.5},
   max_health = 40,
   corpse = "small-remnants",
@@ -21,6 +21,7 @@ MoarInserterEntityPrototypeTemplate = {
       percent = 90
     }
   },
+  order = "TEMPLATE",
   collision_box = {{-0.15, -0.15}, {0.15, 0.15}},
   selection_box = {{-0.4, -0.35}, {0.4, 0.45}},
   pickup_position = {0, -5},
@@ -110,6 +111,7 @@ MoarInserterEntityPrototypeTemplate = {
 function init(obj, typeArg, rangeArg, directionArg)
   local baseName = typeArg .. "-" .. rangeArg .. "-MIinserter"
   obj.name = baseName .. "-" .. directionArg
+  obj.order = obj.name
   
   -- GRAPHICS
   obj.icon = "__MoarInserters__/graphics/icons/" .. baseName .. ".png"
@@ -138,6 +140,7 @@ function init(obj, typeArg, rangeArg, directionArg)
   if directionArg == "straight" then
     obj.insert_position = {0, distance}
   else
+    obj.subgroup = "moarinserters-mapeditorcleanup"
     local xVal = string.find(directionArg, "right") and -distance or distance
     if string.find(directionArg, "upper") then
       obj.insert_position = {xVal, distance}
