@@ -18,6 +18,7 @@ function init(obj, typeArg, rangeArg)
   if typeArg == "alien" then
     obj.ingredients = {
       {"smart-inserter", 1},
+      {debugMode and "copper-plate" or "advanced-circuit", 2},
       {debugMode and "iron-plate" or "alien-science-pack", 1}
     }
   else
