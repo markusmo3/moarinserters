@@ -33,15 +33,15 @@ data:extend(
   },
   {
     type = "item-subgroup",
-    name = "moarinserters-tools",
+    name = "moarinserters-golden",
     group = "moarinserters",
-    order = "4"
+    order = "5"
   },
   {
     type = "item-subgroup",
-    name = "moarinserters-mapeditorcleanup",
+    name = "moarinserters-tools",
     group = "moarinserters",
-    order = "5"
+    order = "6"
   }
 }
 )

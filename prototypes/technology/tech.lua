@@ -36,10 +36,13 @@ data:extend({
     effects = effectTableAlien,
     unit = 
 	{
-      count = debugMode and 1 or 30,
+      count = debugMode and 1 or 20,
       ingredients = 
 	  {
-		{debugMode and "science-pack-1" or "alien-science-pack", 1}
+        {"science-pack-1", 1},
+        {"science-pack-2", 1},
+        {"science-pack-3", 1},
+		{"alien-science-pack", 1}
 	  },
       time = 30
     }

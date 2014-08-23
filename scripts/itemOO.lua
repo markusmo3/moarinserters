@@ -19,23 +19,11 @@ function init(obj, typeArg, rangeArg)
   obj.subgroup = "moarinserters-" .. typeArg
   obj.place_result = baseName .. "-straight"
   
-  obj.order = "a[moarinserters]-" .. getOrderCharacter(rangeArg) .. "[range]"
+  obj.order = "a[moarinserters]-" .. getOrderCharacterRange(rangeArg) .. "[range]"
 end
 
 function createItemPrototype(typeArg, rangeArg)
   local copy = moarinserters_deepcopy(MoarInserterItemPrototypeTemplate)
   init(copy, typeArg, rangeArg)
   return copy
-end
-
-function getOrderCharacter(rangeArg)
-  if rangeArg == "short" then
-    return "a"
-  elseif rangeArg == "normal" then
-    return "b"
-  elseif rangeArg == "medium" then
-    return "c"
-  elseif rangeArg == "long" then
-    return "d"
-  end
 end

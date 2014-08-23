@@ -111,7 +111,6 @@ MoarInserterEntityPrototypeTemplate = {
 function init(obj, typeArg, rangeArg, directionArg)
   local baseName = typeArg .. "-" .. rangeArg .. "-MIinserter"
   obj.name = baseName .. "-" .. directionArg
-  obj.order = obj.name
   
   -- GRAPHICS
   obj.icon = "__MoarInserters__/graphics/icons/" .. baseName .. ".png"
@@ -140,7 +139,8 @@ function init(obj, typeArg, rangeArg, directionArg)
   if directionArg == "straight" then
     obj.insert_position = {0, distance}
   else
-    obj.subgroup = "moarinserters-mapeditorcleanup"
+    obj.subgroup = "moarinserters-" .. typeArg
+    obj.order = "b[moarinserters]-" .. getOrderCharacterRange(rangeArg) .. "[range]-" .. getOrderCharacterDirection(directionArg) .. "[direction]"
     local xVal = string.find(directionArg, "right") and -distance or distance
     if string.find(directionArg, "upper") then
       obj.insert_position = {xVal, distance}
@@ -182,5 +182,40 @@ end
 function createEntityPrototype(typeArg, rangeArg, directionArg)
   local copy = moarinserters_deepcopy(MoarInserterEntityPrototypeTemplate)
   init(copy, typeArg, rangeArg, directionArg)
+  return copy
+end
+
+function initGolden(obj, xinput, yinput, xoutput, youtput, isNearSideOutput)
+  local baseName = "golden-MIinserter#" .. xinput .. "_".. yinput .. ":" .. xoutput .. "_" .. youtput .. (isNearSideOutput and "#near" or "#far")
+  obj.name = baseName
+  
+  -- GRAPHICS
+  obj.icon = "__MoarInserters__/graphics/icons/golden-MIinserter.png"
+  obj.hand_base_picture["filename"] = "__MoarInserters__/graphics/entity/hand/golden-hand-base.png"
+  obj.hand_closed_picture["filename"] = "__MoarInserters__/graphics/entity/hand/golden-hand-closed.png"
+  obj.hand_open_picture["filename"] = "__MoarInserters__/graphics/entity/hand/golden-hand-open.png"
+  obj.platform_picture["sheet"] = "__MoarInserters__/graphics/entity/platform/golden-platform.png"
+  
+  -- RANGE DEPENDENT
+  obj.pickup_position = {xinput, yinput}
+  obj.hand_size = 2
+  
+  -- DIRECTION DEPENDENT
+  local outputAdder = isNearSideOutput and -0.15 or 0.15
+  obj.insert_position = {xoutput + outputAdder, youtput + outputAdder}
+  obj.subgroup = "moarinserters-golden"
+  obj.order = baseName
+  
+  obj.extension_speed = 0.14
+  obj.rotation_speed = 0.07
+  obj.energy_per_movement = 7000
+  obj.energy_per_rotation = 7000
+  obj.filter_count = 5
+  obj.programmable = true
+end
+
+function createGoldenEntityPrototype(xinput, yinput, xoutput, youtput, isNearSideOutput)
+  local copy = moarinserters_deepcopy(MoarInserterEntityPrototypeTemplate)
+  initGolden(copy, xinput, yinput, xoutput, youtput, isNearSideOutput)
   return copy
 end
